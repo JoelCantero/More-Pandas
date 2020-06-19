@@ -30,7 +30,7 @@ def answer_one():
             "Iran, Islamic Rep.": "Iran",
             "Hong Kong SAR, China": "Hong Kong"
             })\
-        .rename(column={'Country Name': 'Country'})\
+        .rename(columns={'Country Name': 'Country'})\
         .set_index('Country')
     ScimEn = pd.read_excel('scimagojr-3.xlsx').set_index('Country')
     
@@ -58,6 +58,10 @@ def answer_two():
 
 def answer_three():
     Top15 = answer_one()
+    rows = ['2006', '2007', '2008', 
+        '2009', '2010', '2011', 
+        '2012','2013', '2014', '2015']
+    avgGDP = Top15.apply(lambda x: np.average(x[rows]), axis=1)
     return "ANSWER"
 
 
