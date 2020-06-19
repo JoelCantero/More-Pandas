@@ -61,8 +61,7 @@ def answer_three():
     rows = ['2006', '2007', '2008', 
         '2009', '2010', '2011', 
         '2012','2013', '2014', '2015']
-    avgGDP = Top15.apply(lambda x: np.average(x[rows]), axis=1)
-    return "ANSWER"
+    return Top15[rows].mean(axis=1).rename('avgGDP').sort_values(ascending=False)
 
 
 # ### Question 4 (6.6%)
@@ -74,8 +73,8 @@ def answer_three():
 
 
 def answer_four():
-    Top15 = answer_one()
-    return "ANSWER"
+	top6country = answer_three().iloc[[5]].first_valid_index()
+    return answer_one().loc[top6country]['2015'] - answer_one().loc[top6country]['2006']
 
 
 # ### Question 5 (6.6%)
@@ -88,7 +87,7 @@ def answer_four():
 
 def answer_five():
     Top15 = answer_one()
-    return "ANSWER"
+    return Top15['Energy Supply per Capita'].mean()
 
 
 # ### Question 6 (6.6%)
@@ -101,7 +100,8 @@ def answer_five():
 
 def answer_six():
     Top15 = answer_one()
-    return "ANSWER"
+    return (Top15.sort_values(by='% Renewable', ascending=False).iloc[0].name,
+    	Top15.sort_values(by='% Renewable', ascending=False).iloc[0]['% Renewable'])
 
 
 # ### Question 7 (6.6%)
